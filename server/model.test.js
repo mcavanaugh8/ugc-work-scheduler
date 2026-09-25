@@ -1,0 +1,10 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {dueDate,validateDeal,validDate} from './model.js';
+const base={brand:'Brand',title:'Video',stage:'Signed',compensationType:'Paid',amount:500,deadlineType:'relative',dealDate:'2025-01-01',receivedDate:'2024-02-28',turnaroundDays:2,tasks:[]};
+test('relative deadlines cross leap days and year boundaries',()=>{assert.equal(dueDate(base),'2024-03-01');assert.equal(dueDate({...base,receivedDate:'2025-12-30',turnaroundDays:5}),'2026-01-04');});
+test('product-dependent deadlines stay unscheduled without arrival',()=>assert.equal(dueDate({...base,receivedDate:''}),null));
+test('fixed deadlines are independent of product receipt',()=>assert.equal(dueDate({...base,deadlineType:'fixed',fixedDueDate:'2026-01-08'}),'2026-01-08'));
+test('retroactive dates accepted and money normalized',()=>{assert.equal(validateDeal({...base,amount:100.125}).amount,100.13);assert.equal(validateDeal(base).dealDate,'2025-01-01');});
+test('exchange is excluded from cash compensation',()=>{const d=validateDeal({...base,compensationType:'Exchange',paidDate:'2025-03-01'});assert.equal(d.amount,0);assert.equal(d.paidDate,'');});
+test('invalid dates, amounts and stages rejected',()=>{assert.equal(validDate('2025-02-30'),false);for(const patch of [{amount:-1},{amount:'oops'},{stage:'invalid'},{turnaroundDays:1.5},{dealDate:'2025-02-30'},{deadlineType:'fixed',fixedDueDate:''}])assert.throws(()=>validateDeal({...base,...patch}));});
