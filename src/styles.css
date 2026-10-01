@@ -68,3 +68,10 @@
 @media(max-width:600px){.calendar-filters{margin:0 19px 16px}}
 
 .payment-breakdown{margin:0 0 14px;padding:0;font-size:11px}.payment-breakdown>div{display:flex;justify-content:space-between;gap:10px;margin-top:8px}.payment-breakdown dt{color:#758168}.payment-breakdown dd{margin:0;font-weight:600;font-variant-numeric:tabular-nums;white-space:nowrap}
+.payment-paid{background:#e7efdf;color:#526e43}
+.payment-unpaid{background:#f5edda;color:#826c30}
+.deal-name>.payment-status,.deadline-row>div:nth-child(2)>.payment-status{display:inline-block;margin-top:7px;font-size:9px}
+.calendar-event .payment-status{margin-top:5px;font-size:8px;padding:3px 5px}
+.focus-tasks .payment-status{margin-top:5px}
+.form-section .payment-status{margin-left:8px}
+.payment-followup-list{max-height:420px;overflow-y:auto}
