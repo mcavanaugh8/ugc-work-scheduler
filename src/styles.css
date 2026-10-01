@@ -75,3 +75,7 @@
 .focus-tasks .payment-status{margin-top:5px}
 .form-section .payment-status{margin-left:8px}
 .payment-followup-list{max-height:420px;overflow-y:auto}
+.deal-payment-filters{display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:20px;font-size:11px;color:#758168}
+.deal-payment-filters label{display:flex;align-items:center;gap:7px;padding:9px 12px;border:1px solid #dde4d7;border-radius:7px;background:white;cursor:pointer}
+.deal-payment-filters label.selected{border-color:#7a926a;background:#edf2e5;color:#344f3b}
+.deal-payment-filters input{margin:0;accent-color:#54734d}
